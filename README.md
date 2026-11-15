@@ -77,15 +77,11 @@ This project has taught me that the reason there isn't a consensus is that the q
 
 The script prints the cleaning steps and both regression summaries, then saves both charts as images.
 
-## Tools
-
-Python, pandas, NumPy, statsmodels, matplotlib
-
-Part 2: How Much of Inflammation Do These Factors Explain?
+## Part 2: How Much of Inflammation Do These Factors Explain?
 
 A few weeks after completing my analysis, I began to think about how much variables outside of the dataset actually affect inflammation. This is critical to have an understanding of because having a rough answer to this question would help me get a rough idea of how much of inflammation the factors I chose actually explained. From this thought, I decided it made sense to run a random forest, a machine learning method that allows the coder to use factors to predict values of an outcome. I trained the random forest on 80% of the adult male records and tasked it with predicting the CRP values of the other 20% based on what it had learned from the 80%. I did this in order to see how well the variables I chose could predict inflammation levels, which would give me a very rough gauge on how much outside variables were involved.
 
-Approach
+## Approach
 
 I started by setting up the random forest, which meant choosing an 80 to 20 split between training and testing data and 300 decision trees. A decision tree is a simple machine learning model on its own. It sorts men into groups using a series of yes or no questions about the factors, such as whether a man's BMI is above a certain number. A single tree can be unreliable because, due to random chance, it can memorize unhelpful patterns in the training data, known as noise, which distorts its predictions on new data. To combat this, a random forest uses many trees, 300 in my case, each trained on a slightly different random sample of the men, so that when some trees memorize noise, the others balance it out when their predictions are averaged.
 
@@ -93,7 +89,7 @@ Before the final test, I ran a practice round called cross validation. I split t
 
 I ran this process on three sets of factors: all 16 factors from Part 1 of my analysis, to see how much they could explain together, only the diet factors, to see how well diet could predict inflammation on its own, and all of the factors except diet, so I could compare it to the full set and see how much diet added.
 
-Results
+## Results
 
 The random forest explained about 20% of the differences in CRP between men it had not seen, which is an R² of 0.197. R² is a score where 0 means the model did no better than guessing the average man's CRP for everyone and 1 means a perfect prediction. The model relied most heavily on BMI, with age a distant second. The diet factors on their own scored about 0, and adding them to the other factors only raised the score from 0.182 to 0.197. I believe this is because differences in CRP between men from things like BMI and age are large compared to the small effects of individual nutrients, so diet alone could not stand out.
 
@@ -110,11 +106,12 @@ Each bar shows how much the model's score dropped when that factor's values were
 
 Beyond BMI and age, it gets murky whether the other factors explained inflammation, and I believe there are two reasons. First, machine learning models tend to favor factors that are strongly associated with the outcome and can tune out the subtle contributions of others, especially when several factors are closely related to each other, like the diet factors are. Second, the models were only trained on a few thousand records, and I think it is possible that with more data the subtle effects would become clearer.
 
-Limitations
+## Limitations
 The data comes from a survey, the diets were self reported, and CRP was measured once per person.
 A random forest shows what predicts CRP, not what causes it, so the 20% is a rough estimate of what my factors can predict and not a precise measure of cause.
 Shuffling one factor at a time can make closely related factors, like the diet factors, look less important than they are.
 The results come from one random split of the men, so a different split would give a slightly different number.
-Conclusion
+
+## Conclusion
 
 Overall, this part of the project answered my question, which was roughly how much of the differences in inflammation my factors from Part 1 could explain, and the answer was about 20%. It also strengthened my understanding of the foundations of machine learning and of the data I work with. The results are consistent with my assumption that things outside of my analysis, such as genetics, play a large role in inflammation. Even though the diet factors did not explain much of the differences in CRP among men as a whole, Part 1 still found small associations, such as monounsaturated fat with lower CRP, and diet is one of the few things a person can change, so it may still be worth paying attention to. These are associations and not proof of cause.
