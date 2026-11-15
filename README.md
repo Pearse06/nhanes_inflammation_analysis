@@ -93,6 +93,7 @@ I ran this process on three sets of factors: all 16 factors from Part 1 of my an
 
 The random forest explained about 20% of the differences in CRP between men it had not seen, which is an R² of 0.197. R² is a score where 0 means the model did no better than guessing the average man's CRP for everyone and 1 means a perfect prediction. The model relied most heavily on BMI, with age a distant second. The diet factors on their own scored about 0, and adding them to the other factors only raised the score from 0.182 to 0.197. I believe this is because differences in CRP between men from things like BMI and age are large compared to the small effects of individual nutrients, so diet alone could not stand out.
 
+| --- | --- | --- |
 Factors used	Cross validated R² (training men)	Test R² (hidden men)
 Diet factors only	-0.001	-0.007
 Age, BMI, sleep, exercise, smoking only	0.224	0.182
